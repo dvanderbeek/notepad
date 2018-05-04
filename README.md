@@ -1,5 +1,6 @@
 # TODO
 Make author class configurable (association, controller)
+Make :admin namespace configurable for redirect in controller
 
 # Notepad
 Short description and motivation.
