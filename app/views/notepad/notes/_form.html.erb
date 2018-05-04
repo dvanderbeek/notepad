@@ -1,21 +1,9 @@
-<%= form_with(model: [notepad, note], local: true) do |form| %>
-  <% if note.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h2>
-
-      <ul>
-      <% note.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_with(model: [notepad, note], id: "notes-form") do |form| %>
   <%= form.hidden_field :notable_type %>
   <%= form.hidden_field :notable_id %>
 
   <div class="form-group mb-0">
-    <%= form.text_area :body, class: "form-control" %>
+    <%= form.text_area :body, class: "form-control #{'is-invalid' if note.errors.any?}" %>
   </div>
 
   <div class="actions">

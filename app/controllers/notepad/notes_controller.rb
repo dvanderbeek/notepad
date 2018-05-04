@@ -6,12 +6,7 @@ module Notepad
     def create
       @note = Note.new(note_params)
       @note.author = current_admin_user
-
-      if @note.save
-        redirect_to [main_app, :admin, @note.notable], notice: 'Note was successfully created.'
-      else
-        render :new
-      end
+      render @note.save ? :create : :new
     end
 
     # PATCH/PUT /notes/1

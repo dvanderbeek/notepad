@@ -1,0 +1,2 @@
+$("#notes").prepend("<%= j render(@note) %>");
+$("#notes-form").replaceWith("<%= j render('form', note: Notepad::Note.new(notable: @note.notable)) %>");
