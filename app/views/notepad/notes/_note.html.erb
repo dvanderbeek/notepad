@@ -1,0 +1,4 @@
+<div class="list-group-item">
+  <p><%= note.body %></p>
+  <small><%= note.author.email %> <%= link_to "Delete", [notepad, note], method: :delete %></small>
+</div>

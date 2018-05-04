@@ -1,0 +1,3 @@
+<div class="list-group">
+  <%= render partial: "notepad/notes/note", collection: Notepad::Note.where(notable: notable).order(created_at: :desc) %>
+</div>

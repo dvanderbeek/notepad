@@ -1,3 +1,6 @@
+# TODO
+Make author class configurable (association, controller)
+
 # Notepad
 Short description and motivation.
 

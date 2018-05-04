@@ -1,33 +1,14 @@
-require_dependency "notepad/application_controller"
-
 module Notepad
-  class NotesController < ApplicationController
+  class NotesController < ::Admin::BaseController
     before_action :set_note, only: [:show, :edit, :update, :destroy]
-
-    # GET /notes
-    def index
-      @notes = Note.all
-    end
-
-    # GET /notes/1
-    def show
-    end
-
-    # GET /notes/new
-    def new
-      @note = Note.new
-    end
-
-    # GET /notes/1/edit
-    def edit
-    end
 
     # POST /notes
     def create
       @note = Note.new(note_params)
+      @note.author = current_admin_user
 
       if @note.save
-        redirect_to @note, notice: 'Note was successfully created.'
+        redirect_to [main_app, :admin, @note.notable], notice: 'Note was successfully created.'
       else
         render :new
       end
@@ -36,7 +17,7 @@ module Notepad
     # PATCH/PUT /notes/1
     def update
       if @note.update(note_params)
-        redirect_to @note, notice: 'Note was successfully updated.'
+        redirect_to [main_app, :admin, @note.notable], notice: 'Note was successfully updated.'
       else
         render :edit
       end
@@ -44,8 +25,12 @@ module Notepad
 
     # DELETE /notes/1
     def destroy
-      @note.destroy
-      redirect_to notes_url, notice: 'Note was successfully destroyed.'
+      if @note.author == current_admin_user && @note.destroy
+        flash[:notice] = 'Note was successfully destroyed.'
+      else
+        flash[:alert] = 'You can only delete your own notes.'
+      end
+      redirect_to [main_app, :admin, @note.notable]
     end
 
     private
@@ -56,7 +41,7 @@ module Notepad
 
       # Only allow a trusted parameter "white list" through.
       def note_params
-        params.require(:note).permit(:body, :author_id, :notable_id, :notable_type)
+        params.require(:note).permit(:body, :notable_id, :notable_type)
       end
   end
 end

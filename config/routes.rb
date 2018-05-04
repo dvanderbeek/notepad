@@ -1,3 +1,3 @@
 Notepad::Engine.routes.draw do
-  resources :notes
+  resources :notes, only: [:create, :update, :destroy]
 end
