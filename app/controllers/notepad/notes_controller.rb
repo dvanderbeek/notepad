@@ -2,6 +2,10 @@ module Notepad
   class NotesController < Notepad.base_controller.safe_constantize
     before_action :set_note, only: [:show, :edit, :update, :destroy]
 
+    # GET /notes/1
+    def show
+    end
+
     # POST /notes
     def create
       @note = Note.new(note_params)

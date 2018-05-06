@@ -6,7 +6,7 @@
   <small>
     <%= note.author.email %>
     <span class="float-right">
-      <%= link_to "Edit", [notepad, :edit, note], remote: true %>
+      <%= link_to "Edit", [notepad, :edit, note], remote: true, class: "edit-link" %>
       <%= link_to "Delete", [notepad, note], method: :delete %>
     </span>
   </small>
