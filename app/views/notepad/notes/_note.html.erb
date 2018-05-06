@@ -5,9 +5,9 @@
   
   <small>
     <%= note.author.email %>
-    <span class="float-right">
+    <% if note.author == send(Notepad.author_method) %>
       <%= link_to "Edit", [notepad, :edit, note], remote: true, class: "edit-link" %>
       <%= link_to "Delete", [notepad, note], method: :delete %>
-    </span>
+    <% end %>
   </small>
 </div>
