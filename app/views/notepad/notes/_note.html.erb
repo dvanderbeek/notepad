@@ -1,4 +1,13 @@
-<div class="list-group-item">
-  <p><%= note.body %></p>
-  <small><%= note.author.email %> <%= link_to "Delete", [notepad, note], method: :delete %></small>
+<div class="list-group-item" id="<%= dom_id(note) %>">
+  <div class="body">
+    <%= simple_format note.body %>  
+  </div>
+  
+  <small>
+    <%= note.author.email %>
+    <span class="float-right">
+      <%= link_to "Edit", [notepad, :edit, note], remote: true %>
+      <%= link_to "Delete", [notepad, note], method: :delete %>
+    </span>
+  </small>
 </div>

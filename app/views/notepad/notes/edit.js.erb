@@ -1,0 +1,3 @@
+<% if @note.author == send(Notepad.author_method) %>
+  $("#<%= dom_id(@note) %> .body").html("<%= j render 'form', note: @note %>");
+<% end %>

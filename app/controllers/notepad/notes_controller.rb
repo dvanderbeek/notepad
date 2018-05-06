@@ -9,9 +9,13 @@ module Notepad
       render @note.save ? :create : :new
     end
 
+    # GET /notes/1/edit
+    def edit
+    end
+
     # PATCH/PUT /notes/1
     def update
-      if @note.update(note_params)
+      if @note.author == send(Notepad.author_method) && @note.update(note_params)
         redirect_to redirect_path, notice: 'Note was successfully updated.'
       else
         render :edit
